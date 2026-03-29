@@ -7,7 +7,9 @@ function App() {
   useEffect(() => {
     const loadSkills = async () => {
       try {
-        const res = await axios.get("https://job-insight-7b3h.onrender.com");
+        const res = await axios.get(
+          "https://job-insight-7b3h.onrender.com/insights",
+        );
         setSkills(res.data);
       } catch (err) {
         console.error(err);
