@@ -2,13 +2,16 @@ import puppeteer from "puppeteer";
 
 export async function scrapeJobs() {
   const browser = await puppeteer.launch({
+    executablePath: "/usr/bin/chromium",
     headless: "new",
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
+
   const context = await browser.createBrowserContext({
     userAgent:
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
   });
+
   const page = await context.newPage();
 
   await page.goto("https://remoteok.com/remote-dev-jobs", {
