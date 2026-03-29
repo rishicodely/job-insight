@@ -25,19 +25,15 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 app.get("/insights", async (req, res) => {
   try {
     const jobs = await scrapeJobs();
-    const processedJobs = [];
-    for (const job of jobs) {
-      console.log(`Processing: ${job.title}...`);
-
-      const skills = await extractSkills(job.description);
-      processedJobs.push({
-        title: job.title,
-        skills: skills,
-      });
-
-      console.log("Sleeping for 5 seconds to avoid rate limits...");
-      await sleep(5000);
-    }
+    const processedJobs = await Promise.all(
+      jobs.map(async (job) => {
+        const skills = await extractSkills(job.description);
+        return {
+          title: job.title,
+          skills,
+        };
+      }),
+    );
     const aggregated = aggregateSkills(processedJobs);
 
     const sorted = Object.entries(aggregated)

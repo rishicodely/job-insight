@@ -2,7 +2,6 @@ import puppeteer from "puppeteer";
 
 export async function scrapeJobs() {
   const browser = await puppeteer.launch({
-    executablePath: "/usr/bin/chromium",
     headless: "new",
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
