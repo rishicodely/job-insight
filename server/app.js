@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import { aggregateSkills } from "./aggregateSkills.js";
 import cors from "cors";
 
-dotenv.config({ path: "../.env" });
+dotenv.config();
 const app = express();
 app.use(cors());
 

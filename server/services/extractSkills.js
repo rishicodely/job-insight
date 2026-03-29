@@ -1,6 +1,6 @@
 import { OpenAI } from "openai/client.js";
 import dotenv from "dotenv";
-dotenv.config({ path: "../.env" });
+dotenv.config();
 
 const client = new OpenAI({
   apiKey: process.env.GROQ_API_KEY,
