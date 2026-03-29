@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     const loadSkills = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/insights");
+        const res = await axios.get("https://job-insight-7b3h.onrender.com");
         setSkills(res.data);
       } catch (err) {
         console.error(err);
@@ -18,19 +18,31 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 font-sans">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">
-        🔥 Job Market Insights
+    <div className="min-h-screen bg-zinc-950 text-white p-8 font-sans">
+      <h1 className="text-4xl font-semibold mb-8 tracking-tight">
+        Job Market Insights
       </h1>
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         {skills.map((skill, index) => (
           <div
             key={index}
-            className="bg-white shadow-md rounded-lg p-4 flex justify-between items-center hover:shadow-lg transition"
+            className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 hover:border-zinc-700 transition"
           >
-            <span className="font-semibold text-gray-700">{skill.name}</span>
-            <span className="text-blue-600 font-bold">{skill.count}</span>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-zinc-300">{skill.name}</span>
+              <span className="text-zinc-500 text-sm">{skill.count}</span>
+            </div>
+
+            {/* bar */}
+            <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-white"
+                style={{
+                  width: `${skill.count * 20}px`,
+                }}
+              />
+            </div>
           </div>
         ))}
       </div>

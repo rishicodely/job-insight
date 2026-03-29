@@ -9,6 +9,8 @@ dotenv.config({ path: "../.env" });
 const app = express();
 app.use(cors());
 
+const PORT = process.env.PORT || 5000;
+
 app.get("/test-scrape", async (req, res) => {
   try {
     const jobs = await scrapeJobs();
@@ -48,4 +50,4 @@ app.get("/insights", async (req, res) => {
   }
 });
 
-app.listen(5000, () => console.log("Server running on 5000"));
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
